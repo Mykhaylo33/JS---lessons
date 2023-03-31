@@ -1,6 +1,6 @@
 import { addNewTask, handleTaskBehaviour } from "./functions.js";
 
-// ** 1 - Доступ до елементів
+// ** 1 - Отримуємо доступ до елементів
 const addBtn = document.getElementById("addBtn");
 const myUL = document.getElementById("myUL");
 
