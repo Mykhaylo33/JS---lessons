@@ -1,3 +1,7 @@
+import {save, load} from "./storage.js"
+// save("tast", "helo")
+const STORAGE_KEY = "tasks"
+
 const myInput = document.getElementById("myInput");
 
 const myUL = document.getElementById("myUL");
@@ -19,6 +23,7 @@ function addNewTask() {
     return;
   }
   createLi(task);
+  addTaskToStorage(task)
 }
 
 
@@ -34,6 +39,15 @@ function createLi(text) {
 }
 
 
+// !5 Добавляє бтн видалення ел.списку .
+function addCloseButton(target) {
+  const span = document.createElement("span");
+  const txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  target.appendChild(span);
+}
+
 // *! 6 Додає або видаляє ел.списку
 function handleTaskBehaviour({ target }) {
   // console.log(target);
@@ -46,14 +60,30 @@ if (target.nodeName === "LI") {
 } 
 }
 
-
-// !5 Добавляє бтн видалення ел.списку .
-function addCloseButton(target) {
-  const span = document.createElement("span");
-  const txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  target.appendChild(span);
+function createTaskObj (text, isDone) {
+  return{
+    text,
+    isDone,
+    id: 0,
+  }
 }
+
+function addTaskToStorage(text, isDone = false) {
+  const currentState = load(STORAGE_KEY)
+  if (currentState === undefined){
+  // Створюємо масив і додаємо перший обєкт задачі
+  const arr = [createTaskObj(text, isDone)]
+console.log(arr)
+save(STORAGE_KEY, arr)
+}else{
+// До існуючого масиву додати новий обєкт задачі
+  // const currentState = load(STORAGE_KEY)
+  currentState.push(createTaskObj (text, isDone))
+  save(STORAGE_KEY, currentState)
+
+}
+}
+
+
 
 export { addNewTask, handleTaskBehaviour };
