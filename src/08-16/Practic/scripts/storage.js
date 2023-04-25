@@ -1,4 +1,4 @@
-
+// Зберігає за ключем знаяення 
 export const save = (key, value) =>{
 try {
     const data = JSON.stringify(value)
