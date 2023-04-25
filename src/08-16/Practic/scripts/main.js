@@ -1,4 +1,4 @@
-import { addNewTask, handleTaskBehaviour } from "./functions.js";
+import { addNewTask, handleTaskBehaviour,fillTasksLists } from "./functions.js";
 
 // ** 1 - Отримуємо доступ до елементів
 const addBtn = document.getElementById("addBtn");
@@ -8,3 +8,5 @@ const myUL = document.getElementById("myUL");
 addBtn.addEventListener("click", addNewTask);
 
 myUL.addEventListener("click", handleTaskBehaviour);
+
+window.addEventListener("DOMContentLoaded", fillTasksLists)

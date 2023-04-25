@@ -1,11 +1,11 @@
 import {save, load} from "./storage.js"
-// save("tast", "helo")
+// save("test", "helo")
 const STORAGE_KEY = "tasks"
 
 const myInput = document.getElementById("myInput");
-
 const myUL = document.getElementById("myUL");
 
+let currentId = 0
 
 
 
@@ -28,14 +28,16 @@ function addNewTask() {
 
 
 //  !4 Добавляє список задач і викликається у addNewTask
-function createLi(text) {
+function createLi(text, isDone = false, id = currentId) {
   // Створюємо ел.списку
   const liEl = document.createElement("li");
   //  Додаємо текст ел.списку
   liEl.textContent = text;
-
+  liEl.dataset.id = id
+if (isDone) liEl.classList = "checked";
   myUL.appendChild(liEl);
   addCloseButton(liEl);
+
 }
 
 
@@ -50,21 +52,28 @@ function addCloseButton(target) {
 
 // *! 6 Додає або видаляє ел.списку
 function handleTaskBehaviour({ target }) {
-  // console.log(target);
+const currentState = load(STORAGE_KEY);
 // додає фу-нал видалення статусу задачі.
 if (target.nodeName === "LI") {
   // console.log("LI")
   target.classList.toggle("checked")
+  const taskIndex = currentState.findIndex((task) => Number(task.id)  === Number(target.dataset.id))
+  currentState[taskIndex].isDone = !currentState[taskIndex].isDone
 } else if ( target.classList.contains("close")) {
   target.parentNode.remove()
+  const taskIndex = currentState.findIndex((task) => Number(task.id)  === Number(target.parentNode.dataset.id))
+
+  currentState.splice(taskIndex, 1)
 } 
+save(STORAGE_KEY, currentState)
 }
+
 
 function createTaskObj (text, isDone) {
   return{
     text,
     isDone,
-    id: 0,
+    id: currentId,
   }
 }
 
@@ -82,8 +91,21 @@ save(STORAGE_KEY, arr)
   save(STORAGE_KEY, currentState)
 
 }
+currentId += 1;
 }
 
+// При завантаженні сторінки напрвнує список задачами , якщо такі є 
+function fillTasksLists() {
+  // отримує задачі в lockal Storage 
+  const currentState = load(STORAGE_KEY)
+if (currentState !== undefined ){
+  currentState.forEach(({text, isDone, id}) =>
+   createLi(text, isDone, id))
+   currentId = id +1
+  //  або
+// currentId = currentState.length === 0 ? 0 
+// :currentState[currentState.length -1].id +1 
+}
+}
 
-
-export { addNewTask, handleTaskBehaviour };
+export { addNewTask, handleTaskBehaviour, fillTasksLists};
