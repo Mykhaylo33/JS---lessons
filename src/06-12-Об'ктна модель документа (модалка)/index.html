@@ -5,17 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div class="modal-window" id="modal-window">
-    <h2>
-        This is modal   
-    </h2>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quasi beatae, aliquam quidem odio maxime accusantium.
-    </p>
-    <button class="close" id="closeBtn">Close</button>
-   </div>
-    <script src="./script.js"></script>
+    <!-- Оверлей -->
+<div class="overlay" id="overlay"></div>
+    <!-- Модалка -->
+    <div class="modal-window" id="modalWindow">
+        <h2>
+            This is modal   
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quasi beatae, aliquam quidem odio maxime accusantium.
+        </p>
+        <button class="close" id="closeBtn">Close</button>
+       </div>
+       <!-- Кнопка відкриття модалки -->
+       <button class="open-modal" id="opeBtn">Open modal</button>
+    <script src="script.js"></script>
 </body>
 </html>
