@@ -17,14 +17,29 @@ const refs = {
     openBtn: document.getElementById("openBtn"),
 }
  
+// Відовідає за відкриту чи закриту модалку
 const classes = {
     openModal: "open-modal"
 }
 
 // *2 Вішаймо обробник подій який відкриває модалку
 refs.openBtn.addEventListener("click", handleModal)
+// *2.1 Закриває модалку
+refs.closeBtn.addEventListener("click", handleModal)
+refs.overlay.addEventListener("click", handleModal)
+// * 2.2 Закриває модалку Esc
+document.addEventListener("keydown", handleModalClose)
 
 
-function handleModal(event){
-    console.log(event)
+// Викликається при спрацювакнні подіії "click"
+function handleModal(){
+    document.body.classList.toggle(classes.openModal)
  }
+
+//  Виклик при Esc
+function handleModalClose({code}) {
+    if(code === "Escape"){
+        document.body.classList.remove(classes.openModal)
+    }
+}
+  

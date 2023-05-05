@@ -10,23 +10,48 @@ const colorPickerOptions = [
   { label: 'indigo', color: '#3F51B5' },
 ];
 
-const colorPickerContainerEl = document.querySelector('.js-color-picker');
+// !for
+// const colorPickerContainerEl = document.querySelector('.js-color-picker')
 
-// const elements = colorPickerOptions.map(option => {
+// const elements =[];
+
+// for (let i = 0; i < colorPickerOptions.length; i += 1) {
+//   const option =colorPickerOptions[i]
+
 //   const buttonEl = document.createElement('button');
 //   buttonEl.type = 'button';
-//   buttonEl.classList.add('color-picker__option');
+//   buttonEl.classList.add('color-picker__option')
 //   buttonEl.textContent = option.label;
 //   buttonEl.style.backgroundColor = option.color;
 
-//   return buttonEl;
+//   elements.push(buttonEl)
+// }
+
+// console.log(elements)
+
+// colorPickerContainerEl.append(...elements)
+
+// !АБО  map
+// const colorPickerContainerEl = document.querySelector('.js-color-picker')
+
+// const elements =colorPickerOptions.map(option => {
+//   const buttonEl = document.createElement('button');
+//   buttonEl.type = 'button';
+//   buttonEl.classList.add('color-picker__option')
+//   buttonEl.textContent = option.label;
+//   buttonEl.style.backgroundColor = option.color;
+
+//   return buttonEl
 // });
 
-// console.log(elements);
+// console.log(elements)
 
+// colorPickerContainerEl.append(...elements);
 /*
  * Пишем функцию для создания разметки колорпикера
  */
+const colorPickerContainerEl = document.querySelector('.js-color-picker')
+
 const makeColorPickerOptions = options => {
   return options.map(option => {
     const buttonEl = document.createElement('button');
